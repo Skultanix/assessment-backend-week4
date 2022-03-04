@@ -39,4 +39,12 @@ app.get("/api/fortune", (req, res) => {
   
 });
 
+app.post(`/api/addTurtle`, (req,res)=> {
+  //get text from the input box
+  let turtle = "https://www.kindpng.com/picc/m/109-1097749_transparent-background-turtle-clipart-hd-png-download.png"
+  
+  res.status(200).send(turtle)
+  
+})
+
 app.listen(4000, () => console.log("Server running on 4000"));
