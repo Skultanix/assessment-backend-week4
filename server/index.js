@@ -50,13 +50,16 @@ app.post(`/api/addMessage`, (req, res) => {
   res.status(200).send(newMessage)
 })
 
-app.delete(`api/delete/:index`, (req, res) => {
+app.delete(`/api/delete/:num`, (req, res) => {
   console.log(req.params)
 
-  if(+req.params.index) {
-    messages.splice(req.params.index, 1)
-    res.status(200).send(newMessage)
-  }
+  if(+req.params.num) {
+    messages.splice(req.params.num - 1, 1)
+    res.status(200).send(messages)
+  } else {
+    res.status(400).send("A number was not inputed.")
+}
+console.log(messages)
 })
 
 

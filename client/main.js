@@ -8,6 +8,9 @@ document.getElementById("fortuneButton").onclick = function () {
 
 const fortuneBtn = document.getElementById("fortuneButton")
 
+////
+let newElemNum = 1
+
 const messageInput = document.getElementById(`messageBox`)
 const addMessageButton = document.getElementById(`postMessage`)
 const postArea = document.getElementById("messageArea")
@@ -23,24 +26,37 @@ function createMessage() {
     .then((res) => {
         let messageText = res.data
         let newPost = document.createElement(`h5`)
-        newPost.innerText = messageText
+        newPost.innerText = `${newElemNum}. ${messageText}`
+        newPost.id = `post-message-${newElemNum}`
 
         document.body.insertBefore(newPost, postArea)
-        console.log(messageText)
+        console.log(res)
 
         messageInput.value = ''
+
+        newElemNum++
     })
 }
 addMessageButton.addEventListener(`click`,createMessage)
 
-/*function deleteMessage() {
-    const newIndex = indexInput.value
+////
+let postNum = document.getElementById(`deleteRequest`)
 
-    axios.delete(`http://localhost:4000/api/delete/${newIndex}`)
+function deleteMessage() {
+    const postNumReq = postNum.value
+
+    axios.delete(`http://localhost:4000/api/delete/${postNumReq}`)
       .then((res) =>{
-
+            let killedMessage = document.getElementById(`post-message-${postNumReq}`)
+            killedMessage.remove()
+            alert("Message deleted.")
+            postNumReq.value = ''
+            
       })
       .catch((err) => {
           console.log(err.response.data)
       })
-}*/
+}
+
+const killBtn = document.getElementById(`deleteBtn`)
+killBtn.addEventListener(`click`,deleteMessage)
