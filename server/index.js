@@ -62,5 +62,14 @@ app.delete(`/api/delete/:num`, (req, res) => {
 console.log(messages)
 })
 
+app.put(`/api/update/:num`, (req, res) => {
+  const {updatePost} = req.body
+  const updateNum = req.params.num - 1
+
+  messages[updateNum] = updatePost
+
+  res.status(200).send(updatePost)
+  console.log(messages)
+})
 
 app.listen(4000, () => console.log("Server running on 4000"));

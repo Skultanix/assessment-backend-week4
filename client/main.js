@@ -60,3 +60,24 @@ function deleteMessage() {
 
 const killBtn = document.getElementById(`deleteBtn`)
 killBtn.addEventListener(`click`,deleteMessage)
+////
+let postCont = document.getElementById(`updateMessageBox`)
+
+function updateMessage() {
+    const postNumReq = postNum.value
+    let updatePost = postCont.value
+
+    const content = {
+        updatePost
+    }
+
+    axios.put(`http://localhost:4000/api/update/${postNumReq}`, content)
+      .then((res) => {
+            let changePost = document.getElementById(`post-message-${postNumReq}`)
+            changePost.innerText = `${postNumReq}. ${res.data}`
+            postCont.value = ''
+      })
+}
+
+const updateButton = document.getElementById(`updateBtn`)
+updateButton.addEventListener(`click`, updateMessage)
