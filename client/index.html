@@ -19,34 +19,13 @@
       </script>
 
     <button id="fortuneButton">Reveal Fortune</button>
-
-    <script>
-      document.getElementById("fortuneButton").onclick = function () {
-        axios.get("http://localhost:4000/api/fortune/")
-            .then(function (response) {
-              const data = response.data;
-              alert(data);
-            });
-      };
-    </script>
   
-    <h3>Message</h3>
-    <button id="postMessage">Add a Turtle</button>
+    <h3>Messages</h3>
+    <input id="messageBox" placeholder="Input message here">
+    <button id="postMessage">Add Message</button>
     
-
-    
-    <script>
-      document.getElementById("postMessage").onclick = function () {
-        axios.post("http://localhost:4000/api/addTurtle/")
-            .then(function (response) {
-              let newTurtle = new Image()
-              newTurtle.src = response.data
-              let body = document.getElementsByClassName("container")
-              document.body.appendChild(newTurtle)
-              ;
-            });
-      };
-    </script>
+    <div id="messageArea"></div>
 
   </body>
+  <script src="main.js"></script>
 </html>

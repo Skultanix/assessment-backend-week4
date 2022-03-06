@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 
 
+
 app.use(cors());
 
 app.use(express.json()); // When we want to be able to accept JSON.
@@ -39,12 +40,24 @@ app.get("/api/fortune", (req, res) => {
   
 });
 
-app.post(`/api/addTurtle`, (req,res)=> {
-  //get text from the input box
-  let turtle = "https://www.kindpng.com/picc/m/109-1097749_transparent-background-turtle-clipart-hd-png-download.png"
-  
-  res.status(200).send(turtle)
-  
+const messages = []
+
+app.post(`/api/addMessage`, (req, res) => {
+  console.log(req.body)
+  const {newMessage} = req.body
+
+  messages.push(newMessage)
+  res.status(200).send(newMessage)
 })
+
+app.delete(`api/delete/:index`, (req, res) => {
+  console.log(req.params)
+
+  if(+req.params.index) {
+    messages.splice(req.params.index, 1)
+    res.status(200).send(newMessage)
+  }
+})
+
 
 app.listen(4000, () => console.log("Server running on 4000"));
